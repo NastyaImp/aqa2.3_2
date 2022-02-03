@@ -1,3 +1,5 @@
+package netology;
+
 import com.github.javafaker.Faker;
 import com.google.gson.Gson;
 import io.restassured.builder.RequestSpecBuilder;
@@ -23,12 +25,12 @@ public class DataGenerator {
     private static void sendRequest(RegistrationDto user) {
         // сам запрос
         given() // "дано"
-                .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(new Gson().toJson(user)) // передаём в теле объект, который будет преобразован в JSON
-                .when() // "когда"
-                .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
-                .then() // "тогда ожидаем"
-                .statusCode(200); // код 200 OK
+                .spec(requestSpec)
+                .body(new Gson().toJson(user))
+                .when()
+                .post("/api/system/users")
+                .then()
+                .statusCode(200);
     }
 
     public static String getRandomLogin() {
@@ -48,7 +50,6 @@ public class DataGenerator {
         public static RegistrationDto getRegisteredUser(String status) {
             RegistrationDto registeredUser = getUser(status);
             sendRequest(registeredUser);
-            // Послать запрос на регистрацию пользователя с помощью вызова sendRequest(registeredUser)
             return registeredUser;
         }
     }

@@ -23,11 +23,11 @@ public class DataGenerator {
     private static final Faker faker = new Faker(new Locale("en"));
 
     private static void sendRequest(RegistrationDto user) {
-        // сам запрос
-        given() // "дано"
+
+        given()
                 .spec(requestSpec)
                 .body(new Gson().toJson(user))
-                .when()
+                .when() // "когда"
                 .post("/api/system/users")
                 .then()
                 .statusCode(200);
@@ -43,7 +43,8 @@ public class DataGenerator {
 
     public static class Registration {
 
-        public static RegistrationDto getUser(String status) {
+        public static
+        RegistrationDto getUser(String status) {
             return new RegistrationDto(getRandomLogin(), getRandomPassword(), status);
         }
 
